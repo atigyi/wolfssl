@@ -559,9 +559,10 @@ static char *fgets(char *buff, int sz, FILE *fp)
     #define ROM_SysCtlPeripheralReset SysCtlPeripheralReset
 
     #define WOLFSSL_USER_IO
-    //#undef WOLFSSL_TI_CRYPT
+    // #undef WOLFSSL_TI_CRYPT
     // #undef WOLFSSL_TI_HASH
     #define TARGET_IS_CC3200
+    #define SINGLE_THREADED
 
     #define SIZEOF_LONG_LONG 8
     #define NO_WRITEV
