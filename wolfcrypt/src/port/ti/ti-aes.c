@@ -41,7 +41,9 @@
 #include "inc/hw_memmap.h"
 #include "inc/hw_ints.h"
 #include "driverlib/aes.h"
-#include "driverlib/sysctl.h"
+//#include "driverlib/sysctl.h"
+// #include "/Applications/ti/tirtos_cc32xx_2_16_01_14/products/bios_6_45_02_31/packages/ti/catalog/arm/cortexm4/tiva/ce/sysctl.h"
+#include "ti/catalog/arm/cortexm4/tiva/ce/sysctl.h"
 #include "driverlib/rom_map.h"
 #include "driverlib/rom.h"
 
@@ -276,6 +278,7 @@ static int AesAuthArgCheck(Aes* aes, byte* out, const byte* in, word32 inSz,
         return 1 ;
     }
 
+#if 0
     switch(nonceSz){
     case 7:
         *L = AES_CFG_CCM_L_8; break ;
@@ -296,6 +299,7 @@ static int AesAuthArgCheck(Aes* aes, byte* out, const byte* in, word32 inSz,
     default:
         return 1;
     }
+#endif
     return 0 ;
 }
 
@@ -303,25 +307,27 @@ static void AesAuthSetIv(Aes *aes, const byte *nonce, word32 len, word32 L, int 
 
   if(mode == AES_CFG_MODE_CCM){
     XMEMSET(aes->reg, 0, 16) ;
+#if 0
     switch(L){
-    case AES_CFG_CCM_L_8: 
+    case AES_CFG_CCM_L_8:
       aes->reg[0] = 0x7; break ;
-    case AES_CFG_CCM_L_7: 
+    case AES_CFG_CCM_L_7:
       aes->reg[0] = 0x6; break ;
-    case AES_CFG_CCM_L_6: 
+    case AES_CFG_CCM_L_6:
       aes->reg[0] = 0x5; break ;
-    case AES_CFG_CCM_L_5: 
+    case AES_CFG_CCM_L_5:
       aes->reg[0] = 0x4; break ;
-    case AES_CFG_CCM_L_4: 
+    case AES_CFG_CCM_L_4:
       aes->reg[0] = 0x3; break ;
-    case AES_CFG_CCM_L_3: 
+    case AES_CFG_CCM_L_3:
       aes->reg[0] = 0x2; break ;
-    case AES_CFG_CCM_L_2: 
+    case AES_CFG_CCM_L_2:
       aes->reg[0] = 0x1; break ;
-    case AES_CFG_CCM_L_1: 
+    case AES_CFG_CCM_L_1:
       aes->reg[0] = 0x0; break ;
     }
-    XMEMCPY(((byte *)aes->reg)+1, nonce, len) ; 
+#endif
+    XMEMCPY(((byte *)aes->reg)+1, nonce, len) ;
   } else {
     byte *b = (byte *)aes->reg ;
     XMEMSET(aes->reg, 0, AES_BLOCK_SIZE);

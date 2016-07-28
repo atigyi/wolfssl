@@ -32,7 +32,8 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#include "driverlib/sysctl.h"
+//#include "driverlib/sysctl.h"
+#include "ti/catalog/arm/cortexm4/tiva/ce/sysctl.h"
 #include "driverlib/rom_map.h"
 #include "driverlib/rom.h"
 
