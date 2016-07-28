@@ -548,6 +548,16 @@ static char *fgets(char *buff, int sz, FILE *fp)
 #endif
 
 #ifdef WOLFSSL_TIRTOS
+    #define ROM_SHAMD5Reset( x )
+    #define ROM_AESReset( x )
+    #define ROM_AESDataProcessAuth ROM_AESDataProcessAE
+    #define ROM_DESReset( x )
+
+    #define ROM_SysCtlPeripheralPresent SysCtlPeripheralPresent
+    #define ROM_SysCtlPeripheralEnable SysCtlPeripheralEnable
+    #define ROM_SysCtlPeripheralReady SysCtlPeripheralReady
+    #define ROM_SysCtlPeripheralReset SysCtlPeripheralReset
+
     #define WOLFSSL_USER_IO
     //#undef WOLFSSL_TI_CRYPT
     // #undef WOLFSSL_TI_HASH
