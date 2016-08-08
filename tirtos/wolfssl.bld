@@ -31,7 +31,7 @@
  *	Build	    an alias for xdc.om.xdc.bld.BuildEnvironment
  */
 
-var armOpts = " -ms ";
+var armOpts = " -ms --float_support=vfplib ";
 var gnuOpts = " -D_POSIX_SOURCE ";
 var iarOpts = " --diag_suppress=Pa134 ";
 var ndkDir = "";

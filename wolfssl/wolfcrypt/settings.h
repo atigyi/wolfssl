@@ -563,6 +563,36 @@ static char *fgets(char *buff, int sz, FILE *fp)
     // #undef WOLFSSL_TI_HASH
     #define TARGET_IS_CC3200
     #define SINGLE_THREADED
+    #define HAVE_ANON
+    // #define HAVE_SNI
+
+
+    #define NO_RABBIT
+    // #define NO_ASN
+    #define NO_OLD_TLS
+    #define NO_DES3
+    #define NO_MD4
+    #define NO_RC4
+    #define NO_DH
+    #define NO_DSA
+    #define NO_SHA
+    // #define NO_SHA256
+    // #define NO_SHA512
+
+
+    // from page https://www.wolfssl.com/wolfSSL/Docs-wolfssl-manual-2-building-wolfssl.html
+    // #define NO_HMAC
+    #define NO_PSK
+    #define NO_PWDBASED
+    #define NO_HC128
+    #define SMALL_SESSION_CACHE
+    #define NO_CLIENT_CACHE
+    #define WOLFSSL_SMALL_STACK
+
+    // #define NO_MD5
+    // #define NO_SESSION_CACHE
+    // #define NO_MAIN_DRIVER
+
 
     #define SIZEOF_LONG_LONG 8
     #define NO_WRITEV
@@ -572,14 +602,15 @@ static char *fgets(char *buff, int sz, FILE *fp)
     #define NO_DEV_RANDOM
     #define NO_FILESYSTEM
     #define USE_CERT_BUFFERS_2048
+    // #define USE_CERT_BUFFERS_1024
     #define NO_ERROR_STRINGS
     #define USER_TIME
     #define HAVE_ECC
-    #define HAVE_ALPN
-    #define HAVE_TLS_EXTENSIONS
+    // #define HAVE_ALPN
+    // #define HAVE_TLS_EXTENSIONS
     #define HAVE_AESGCM
-    #define HAVE_SUPPORTED_CURVES
-    #define ALT_ECC_SIZE
+    // #define HAVE_SUPPORTED_CURVES
+    //#define ALT_ECC_SIZE
 
     #ifdef __IAR_SYSTEMS_ICC__
         #pragma diag_suppress=Pa089
@@ -589,6 +620,7 @@ static char *fgets(char *buff, int sz, FILE *fp)
     #endif
 
     #include <ti/sysbios/hal/Seconds.h>
+    // #include <ti/sysbios/family/arm/cc32xx/Seconds.h>
 #endif
 
 #ifdef EBSNET

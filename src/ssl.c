@@ -3188,8 +3188,8 @@ int AddCA(WOLFSSL_CERT_MANAGER* cm, DerBuffer** pDer, int type, int verify)
         #define SESSIONS_PER_ROW 5
         #define SESSION_ROWS 211
     #elif defined(SMALL_SESSION_CACHE)
-        #define SESSIONS_PER_ROW 2
-        #define SESSION_ROWS 3
+        #define SESSIONS_PER_ROW 1
+        #define SESSION_ROWS 1
     #else
         #define SESSIONS_PER_ROW 3
         #define SESSION_ROWS 11

@@ -27,6 +27,6 @@ export XDCTOOLS_JAVA_HOME=/Applications/ti/ccsv6/eclipse/jre/Contents/Home/
 # located in the ccsv*/tools/compiler/* path.
 #
 # Leave assignment empty to disable any toolchain.
-ti.targets.arm.elf.M4F =/Applications/ti/ccsv6/tools/compiler/ti-cgt-arm_15.12.1.LTS/
+ti.targets.arm.elf.M4F =/Applications/ti/ccsv6/tools/compiler/ti-cgt-arm_15.12.1.LTS
 iar.targets.arm.M4F    =
 gnu.targets.arm.M4F    =
