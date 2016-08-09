@@ -553,6 +553,8 @@ static char *fgets(char *buff, int sz, FILE *fp)
     #define ROM_AESDataProcessAuth ROM_AESDataProcessAE
     #define ROM_DESReset( x )
 
+    #define CUSTOM_RAND_GENERATE xively_ssl_rand_generate
+
     #define ROM_SysCtlPeripheralPresent SysCtlPeripheralPresent
     #define ROM_SysCtlPeripheralEnable SysCtlPeripheralEnable
     #define ROM_SysCtlPeripheralReady SysCtlPeripheralReady

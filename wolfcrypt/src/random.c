@@ -1494,6 +1494,7 @@ int wc_GenerateSeed(OS_Seed* os, byte* output, word32 sz)
         return 0;
     }
 
+/*
 #elif defined(WOLFSSL_TIRTOS)
 
     #include <xdc/runtime/Timestamp.h>
@@ -1512,6 +1513,7 @@ int wc_GenerateSeed(OS_Seed* os, byte* output, word32 sz)
 
         return 0;
     }
+*/
 
 #elif defined(WOLFSSL_VXWORKS)
 
