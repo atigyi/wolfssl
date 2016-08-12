@@ -547,9 +547,84 @@ static char *fgets(char *buff, int sz, FILE *fp)
 
 #endif
 
+
 #ifdef WOLFSSL_TIRTOS
+
+    #define SINGLE_THREADED
+
+    // from Bob's port
+    #define NO_OCSP
+    #define NO_DES3
+    #define NO_OLD_TLS
+    #define NO_PSK
+    #define NO_PWDBASED
+    #define CUSTOM_RAND_GENERATE xively_ssl_rand_generate
+    #define CUSTOM_XTIME xively_ssl_time
+    /*cc3200
+CYASSL_IAR_ARM
+FREERTOS
+HAVE_SNI
+HAVE_TLS_EXTENSIONS
+NDEBUG
+NO_OCSP
+NO_WAY_CYASSL_STM32F2
+NO_CYASSL_SERVER
+NO_DES3
+NO_ERROR_STRINGS
+NO_OLD_TLS
+NO_PSK
+NO_PWDBASED
+SMALL_SESSION_CACHE
+    CUSTOM_XTIME=xively_ssl_time */
+
+    // my idea
+    #define HAVE_ANON
+    #define SMALL_SESSION_CACHE
+    #define NO_CLIENT_CACHE
+    #define WOLFSSL_SMALL_STACK
+    #define WOLFSSL_USER_IO
+    #define TARGET_IS_CC3200
+
+    // experimental
+    #define NO_RABBIT
+    #define NO_MD4
+    #define NO_RC4
+    #define NO_DH
+    #define NO_DSA
+    #define NO_SHA
+    #define NO_HC128
+
+    // orig
+    #define SIZEOF_LONG_LONG 8
+    #define NO_WRITEV
+    #define NO_WOLFSSL_DIR
+    #define USE_FAST_MATH
+    #define TFM_TIMING_RESISTANT
+    #define NO_DEV_RANDOM
+    #define NO_FILESYSTEM
+    #define USE_CERT_BUFFERS_2048
+    #define NO_ERROR_STRINGS
+    #define USER_TIME
+    #define HAVE_ECC
+    // #define HAVE_ALPN
+    // #define HAVE_TLS_EXTENSIONS
+    #define HAVE_AESGCM
+    // #define HAVE_SUPPORTED_CURVES
+    #define ALT_ECC_SIZE
+
+    #ifdef __IAR_SYSTEMS_ICC__
+        #pragma diag_suppress=Pa089
+    #elif !defined(__GNUC__)
+        /* Suppress the sslpro warning */
+        #pragma diag_suppress=11
+    #endif
+
+    #include <ti/sysbios/hal/Seconds.h>
+#endif
+
+#ifdef WOLFSSL_TIRTOS_backup
     #define ROM_SHAMD5Reset( x )
-    #define ROM_AESReset( x )
+    //#define ROM_AESReset( x )
     #define ROM_AESDataProcessAuth ROM_AESDataProcessAE
     #define ROM_DESReset( x )
 
