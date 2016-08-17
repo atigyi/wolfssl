@@ -1912,9 +1912,8 @@ static void test_wolfSSL_X509_NAME_get_entry(void)
  * PRE: HAVE_OCSP and HAVE_CERTIFICATE_STATUS_REQUEST
  * POST: 1 returned for success.
  */
-#if defined(HAVE_OCSP)
-    
-#if defined(HAVE_CERTIFICATE_STATUS_REQUEST)
+#if defined(HAVE_OCSP)    
+    #if defined(HAVE_CERTIFICATE_STATUS_REQUEST)
 static int test_wolfSSL_UseOCSPStapling(void)
 {
     int             ret;
@@ -1935,16 +1934,19 @@ static int test_wolfSSL_UseOCSPStapling(void)
    
     wolfSSL_free(ssl);
     wolfSSL_CTX_free(ctx);
-    wolfSSL_Cleanup();
-    
-    if(ret) { return SSL_SUCCESS;}
-    else    { return SSL_FAILURE;}
+
+    if(ret != SSL_SUCCESS){ 
+        wolfSSL_Cleanup();
+        return SSL_FAILURE; 
+    }
+
+    return wolfSSL_Cleanup();
 
 } /*END test_wolfSSL_UseOCSPStapling */
 
-#endif /* HAVE_CERTIFICATE_STATUS_REQUEST. */
+    #endif /* HAVE_CERTIFICATE_STATUS_REQUEST. */
 
-#ifdef HAVE_CERTIFICATE_STATUS_REQUEST_V2
+    #ifdef HAVE_CERTIFICATE_STATUS_REQUEST_V2
 static int test_wolfSSL_UseOCSPStaplingV2(void)
 {
     int                 ret;
@@ -1963,13 +1965,17 @@ static int test_wolfSSL_UseOCSPStaplingV2(void)
 
     wolfSSL_free(ssl);
     wolfSSL_CTX_free(ctx);
-    wolfSSL_Cleanup();
 
-    if(ret) {return SSL_SUCCESS;}
-    else    {return SSL_FAILURE;}
+    if(ret != SSL_SUCCESS){
+        wolfSSL_Cleanup();
+        return SSL_FAILURE;
+    }
+
+    return wolfSSL_Cleanup();
+
 } /*END test_wolfSSL_UseOCSPStaplingV2*/
 
-#endif /* HAVE_CERTIFICATE_STATUS_REQUEST. */
+    #endif /* HAVE_CERTIFICATE_STATUS_REQUEST. */
 #endif /* HAVE_OCSP*/
 
 
@@ -1982,7 +1988,7 @@ static int test_wolfSSL_UseOCSPStaplingV2(void)
 void ApiTest(void)
 {
     printf(" Begin API Tests\n");
-    test_wolfSSL_Init();
+    AssertTrue(test_wolfSSL_Init());
 
     test_wolfSSL_Method_Allocators();
     test_wolfSSL_CTX_new(wolfSSLv23_server_method());
@@ -2014,15 +2020,19 @@ void ApiTest(void)
 
     /*OCSP Stapling. */
 #if defined(HAVE_OCSP)
-#if defined(HAVE_CERTIFICATE_STATUS_REQUEST)
+    #if defined(HAVE_CERTIFICATE_STATUS_REQUEST)
+
     AssertTrue(test_wolfSSL_UseOCSPStapling());
-#endif
-#ifdef HAVE_CERTIFICATE_STATUS_REQUEST_V2
+
+    #endif
+    #ifdef HAVE_CERTIFICATE_STATUS_REQUEST_V2
+
     AssertTrue(test_wolfSSL_UseOCSPStaplingV2());
-#endif
+
+    #endif
 #endif /* HAVE_OCSP. */
 
-    test_wolfSSL_Cleanup();
+    AssertTrue(test_wolfSSL_Cleanup());
     printf(" End API Tests\n");
 
 }
