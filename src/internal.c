@@ -18181,6 +18181,9 @@ int DoSessionTicket(WOLFSSL* ssl, const byte* input, word32* inOutIdx,
                 }
             #endif
 
+            if (!session)
+                session = &ssl->session;
+
             if (!session) {
                 WOLFSSL_MSG("Session lookup for resume failed");
                 ssl->options.resuming = 0;
@@ -18195,6 +18198,9 @@ int DoSessionTicket(WOLFSSL* ssl, const byte* input, word32* inOutIdx,
                                                                        RAN_LEN);
                 if (ret != 0)
                     return ret;
+
+                XMEMCPY(ssl->arrays->masterSecret,
+                    ssl->session.masterSecret, SECRET_LEN);
 
                 #ifdef NO_OLD_TLS
                     ret = DeriveTlsKeys(ssl);
