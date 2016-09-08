@@ -560,10 +560,10 @@ static char *fgets(char *buff, int sz, FILE *fp)
     #define NO_PWDBASED
     #define CUSTOM_RAND_GENERATE xively_ssl_rand_generate
     #define CUSTOM_XTIME xively_ssl_time
+    #define HAVE_SNI
     /*cc3200
 CYASSL_IAR_ARM
 FREERTOS
-HAVE_SNI
 HAVE_TLS_EXTENSIONS
 NDEBUG
 NO_OCSP
@@ -607,7 +607,7 @@ SMALL_SESSION_CACHE
     #define USER_TIME
     #define HAVE_ECC
     // #define HAVE_ALPN
-    // #define HAVE_TLS_EXTENSIONS
+    #define HAVE_TLS_EXTENSIONS
     #define HAVE_AESGCM
     // #define HAVE_SUPPORTED_CURVES
     #define ALT_ECC_SIZE
